@@ -215,7 +215,7 @@ button.action[disabled]:active .arrow {
   border-top-color: #8d8d8d;
 }
 
-button.action.toggled {
+button.action.toggled, button.action:active {
   color: #555;
   border: 1px solid #AAA;
   border-bottom-color: #CCC;
