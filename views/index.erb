@@ -4,187 +4,129 @@
     <title>Youtube Video Manager</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/video-manager.css" />
     <script type="text/javascript" src="/vendor/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="/vendor/ember-0.9.1.js"></script>
-  </head>
-  <body>
-    <div id="container">
-      <nav>
-        <ul>
-          <li class="selected"><a href="#">Uploads</a></li>
-          <li><a href="#">Playlists</a></li>
-          <li><a href="#">History</a></li>
-          <li><a href="#">Watch Later</a></li>
-          <li><a href="#">Favorites</a></li>
-          <li><a href="#">Likes</a></li>
-        </ul>
-      </nav>
-      <section>
-        <div class="header-wrapper">
-          <h2>Uploads</h2>
-          <span class="badge">34</span>
+    <script type="text/javascript" src="/vendor/ember-0.9.2.js"></script>
+    <script type="text/javascript" src="/javascripts/youtube_manager.js"></script>
+    <script type="text/javascript" src="/javascripts/router.js"></script>
+    <script type="text/javascript" src="/javascripts/views/card_view.js"></script>
+    <script type="text/javascript" src="/javascripts/application.js"></script>
+
+    <script type="text/x-handlebars" data-template-name="uploads">
+      <div class="header-wrapper">
+        <h2>Uploads</h2>
+        <span class="badge">34</span>
+      </div>
+
+      <div class="actions-bar">
+        <button type="submit" class="action search"><span>Search</span></button>
+        <input type="text" class="search" placeholder="Search uploads">
+
+        <span class="custom-checkbox">
+          <input type="checkbox" />
+          <span></span>
+        </span>
+        <button type="button" class="action addto">
+          <img class="icon add" src="/images/pixel.gif" alt="" />
+          <span>Add to</span>
+          <img class="arrow" src="/images/pixel.gif" alt="" />
+        </button>
+        <button type="button" disabled="disabled" class="action">
+          <span>Actions</span>
+          <img class="arrow" src="/images/pixel.gif" alt="" />
+        </button>
+        <span class="view-label">View:</span>
+        <button type="button" class="action text">
+          <span>Newest</span>
+          <img class="arrow" src="/images/pixel.gif" alt="" />
+        </button>
+      </div>
+
+      {{view templateName="videos" tagName="ul" classNames="video-list"}}
+
+      <div class="pagination">
+        <div class="wrapper">
+          <button type="button" class="action toggled">
+            <span>1</span>
+          </button>
+          <button type="button" class="action">
+            <span>2</span>
+          </button>
+          <button type="button" class="action">
+            <span>Next &raquo;</span>
+          </button>
+        </div>
+      </div>
+    </script>
+    <script type="text/x-handlebars" data-template-name="playlists">
+      <div class="header-wrapper">
+        <h2>Playlists</h2>
+        <span class="badge">4</span>
+      </div>
+
+      <div class="actions-bar">
+        <span class="view-label">View:</span>
+        <button type="button" class="action text">
+          <span>Newest</span>
+          <img class="arrow" src="/images/pixel.gif" alt="" />
+        </button>
+      </div>
+    </script>
+    <script type="text/x-handlebars" data-template-name="video">
+      <div class="video-content">
+        <span class="custom-checkbox">
+          <input type="checkbox" />
+          <span></span>
+        </span>
+        <div class="thumb-section">
+          <a href="#">
+            <span class="clip"><img {{bindAttr src="thumb"}} /></span>
+            <span class="video-time">{{time}}</span>
+          </a>
         </div>
 
-        <div class="actions-bar">
-          <button type="submit" class="action search"><span>Search</span></button>
-          <input type="text" class="search" placeholder="Search uploads">
-
-          <span class="custom-checkbox">
-            <input type="checkbox" />
-            <span></span>
-          </span>
-          <button type="button" class="action addto">
-            <img class="icon add" src="/images/pixel.gif" alt="" />
-            <span>Add to</span>
-            <img class="arrow" src="/images/pixel.gif" alt="" />
-          </button>
-          <button type="button" disabled="disabled" class="action">
-            <span>Actions</span>
-            <img class="arrow" src="/images/pixel.gif" alt="" />
-          </button>
-          <span class="view-label">View:</span>
-          <button type="button" class="action text">
-            <span>Newest</span>
-            <img class="arrow" src="/images/pixel.gif" alt="" />
-          </button>
+        <div class="info-container">
+          <div class="title">
+            <a href="#">{{title}}</a>
+            <span class="badges">
+              {{#if hd}}
+                <span class="basic">HD</span>
+              {{/if}}
+            </span>
+          </div>
+          <div class="date">{{date}}</div>
         </div>
 
-        <ul class="video-list">
-          <li>
-            <div class="video-content">
-              <span class="custom-checkbox">
-                <input type="checkbox" />
-                <span></span>
-              </span>
-              <div class="thumb-section">
-                <a href="#">
-                  <span class="clip"><img src="/images/thumbs/cerveja.jpg" /></span>
-                  <span class="video-time">0:41</span>
-                </a>
-              </div>
-
-              <div class="info-container">
-                <div class="title">
-                  <a href="#">Abrindo cerveja com desodorante aqui</a>
-                  <span class="badges">
-                    <span class="basic">HD</span>
-                  </span>
-                </div>
-                <div class="date">Oct 8, 2011 06:55 PM</div>
-              </div>
-
-              <div class="icons">
-                <div class="metrics">
-                  <span class="count">
-                    <img src="/images/pixel.gif" alt="" />
-                    <span>47</span>
-                  </span>
-                  <span class="comments">
-                    <img src="/images/pixel.gif" alt="" />
-                    <span>0</span>
-                  </span>
-                </div>
-                <div class="privacy">
-                  <span class="wrapper"><img src="/images/pixel.gif" class="public" alt="Public" /></span>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="video-content">
-              <span class="custom-checkbox">
-                <input type="checkbox" />
-                <span></span>
-              </span>
-              <div class="thumb-section">
-                <a href="#">
-                  <span class="clip"><img src="/images/thumbs/chimarruts.jpg" /></span>
-                  <span class="video-time">2:58</span>
-                </a>
-              </div>
-
-              <div class="info-container">
-                <div class="title">
-                  <a href="#">(Cover) Chimarruts - Do Lado de Cá</a>
-                  <span class="badges">
-                  </span>
-                </div>
-                <div class="date">Aug 8, 2011 04:05 PM </div>
-              </div>
-
-              <div class="icons">
-                <div class="metrics">
-                  <span class="count">
-                    <img src="/images/pixel.gif" alt="" />
-                    <span>31</span>
-                  </span>
-                  <span class="comments">
-                    <img src="/images/pixel.gif" alt="" />
-                    <span>0</span>
-                  </span>
-                </div>
-                <div class="privacy">
-                  <span class="wrapper"><img src="/images/pixel.gif" class="unlisted" alt="Public" /></span>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="selected">
-            <div class="video-content">
-              <span class="custom-checkbox">
-                <input type="checkbox" checked="checked" />
-                <span></span>
-              </span>
-              <div class="thumb-section">
-                <a href="#">
-                  <span class="clip"><img src="/images/thumbs/raining.jpg" /></span>
-                  <span class="video-time">0:34</span>
-                </a>
-              </div>
-
-              <div class="info-container">
-                <div class="title">
-                  <a href="#">IMG 0704</a>
-                  <span class="badges">
-                    <span class="basic">HD</span>
-                  </span>
-                </div>
-                <div class="date">Jul 16, 2011 11:21 AM </div>
-              </div>
-
-              <div class="icons">
-                <div class="metrics">
-                  <span class="count">
-                    <img src="/images/pixel.gif" alt="" />
-                    <span>13</span>
-                  </span>
-                  <span class="comments">
-                    <img src="/images/pixel.gif" alt="" />
-                    <span>0</span>
-                  </span>
-                </div>
-                <div class="privacy">
-                  <span class="wrapper"><img src="/images/pixel.gif" class="private" alt="Public" /></span>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-
-        <div class="pagination">
-          <div class="wrapper">
-            <button type="button" class="action toggled">
-              <span>1</span>
-            </button>
-            <button type="button" class="action">
-              <span>2</span>
-            </button>
-            <button type="button" class="action">
-              <span>Next &raquo;</span>
-            </button>
+        <div class="icons">
+          <div class="metrics">
+            <span class="count">
+              <img src="/images/pixel.gif" alt="" />
+              <span>{{viewCount}}</span>
+            </span>
+            <span class="comments">
+              <img src="/images/pixel.gif" alt="" />
+              <span>{{commentsCount}}</span>
+            </span>
+          </div>
+          <div class="privacy">
+            <span class="wrapper"><img src="/images/pixel.gif" {{bindAttr class="privacy"}} alt="" /></span>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </script>
+    <script type="text/x-handlebars" data-template-name="videos">
+      {{view tagName="li" templateName="video" thumb="/images/thumbs/cerveja.jpg" time="0:41" title="Abrindo cerveja com desodorante aqui" hd="true" date="Oct 8, 2011 06:55 PM" viewCount="47" commentsCount="0" privacy="public"}}
+      {{view tagName="li" templateName="video" thumb="/images/thumbs/chimarruts.jpg" time="2:58" title="(Cover) Chimarruts - Do Lado de Cá" date="Aug 8, 2011 04:05 PM" viewCount="31" commentsCount="0" privacy="unlisted"}}
+      {{view tagName="li" classNames="selected" templateName="video" thumb="/images/thumbs/raining.jpg" time="0:34" title="IMG 0704" hd="true" date="Jul 16, 2011 11:21 AM" viewCount="13" commentsCount="0" privacy="private"}}
+    </script>
+  </head>
+  <body>
+    <script type="text/x-handlebars">
+      <div id="container">
+        <nav>
+          {{collection YoutubeManager.SelectableCollectionView contentBinding="Application.navigation"}}
+        </nav>
+        {{view YoutubeManager.CardView tagName="section" currentViewBinding="Application.router.currentView"}}
+      </div>
+    </script>
     <noscript>
       You need javascript enabled to see this page.
     </noscript>
