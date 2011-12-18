@@ -1,35 +1,19 @@
 
-  YoutubeManager.SelectableView = Ember.View.extend({
+  window.Application = Ember.Application.create();
+
+  Application.NavigationItem = YoutubeManager.SelectableView.extend({
     template: Ember.Handlebars.compile('<a {{bindAttr href="content.link"}}>{{content.label}}</a>'),
-    classNameBindings: ["selected"],
-    selectedBinding: "content.selected",
     didInsertElement: function() {
       return this.$("a").click(function(e) {
         return e.preventDefault();
       });
-    },
-    click: function() {
-      return this.setPath("contentView.selected", this.get("content"));
     }
   });
 
-  YoutubeManager.SelectableCollectionView = Ember.CollectionView.extend({
+  Application.NavigationView = Ember.CollectionView.extend(YoutubeManager.SelectableCollectionView, {
     tagName: "ul",
-    itemViewClass: YoutubeManager.SelectableView,
-    selectedBinding: "content.selected",
-    selectionWillChange: Ember.beforeObserver(function() {
-      var current;
-      current = this.get("selected");
-      if (current) return Ember.set(current, "selected", false);
-    }, "selected"),
-    selectionChanged: (function() {
-      var current;
-      current = this.get("selected");
-      if (current) return Ember.set(current, "selected", true);
-    }).observes("selected")
+    itemViewClass: Application.NavigationItem
   });
-
-  window.Application = Ember.Application.create();
 
   Application.navigation = Ember.ArrayProxy.create({
     content: [

@@ -8,6 +8,8 @@
     <script type="text/javascript" src="/javascripts/youtube_manager.js"></script>
     <script type="text/javascript" src="/javascripts/router.js"></script>
     <script type="text/javascript" src="/javascripts/views/card_view.js"></script>
+    <script type="text/javascript" src="/javascripts/views/selectable_view.js"></script>
+    <script type="text/javascript" src="/javascripts/mixins/selectable_collection_view.js"></script>
     <script type="text/javascript" src="/javascripts/application.js"></script>
 
     <script type="text/x-handlebars" data-template-name="uploads">
@@ -122,7 +124,10 @@
     <script type="text/x-handlebars">
       <div id="container">
         <nav>
-          {{collection YoutubeManager.SelectableCollectionView contentBinding="Application.navigation"}}
+          <%# {{#nav YoutubeManager.SelectableCollection target="Application.navigation"}}%>
+          <%#   %>
+          <%# {{/nav}}%>
+          {{collection Application.NavigationView contentBinding="Application.navigation"}}
         </nav>
         {{view YoutubeManager.CardView tagName="section" currentViewBinding="Application.router.currentView"}}
       </div>

@@ -1,29 +1,12 @@
-YoutubeManager.SelectableView = Ember.View.extend
-  template: Ember.Handlebars.compile('<a {{bindAttr href="content.link"}}>{{content.label}}</a>')
-  classNameBindings: ["selected"]
-  selectedBinding: "content.selected"
+window.Application = Ember.Application.create()
 
+Application.NavigationItem = YoutubeManager.SelectableView.extend
+  template: Ember.Handlebars.compile('<a {{bindAttr href="content.link"}}>{{content.label}}</a>')
   didInsertElement: -> @.$("a").click (e) -> e.preventDefault()
 
-  click: -> @setPath("contentView.selected", @get("content"))
-
-YoutubeManager.SelectableCollectionView = Ember.CollectionView.extend
+Application.NavigationView = Ember.CollectionView.extend YoutubeManager.SelectableCollectionView,
   tagName: "ul"
-  itemViewClass: YoutubeManager.SelectableView
-
-  selectedBinding: "content.selected"
-
-  selectionWillChange: Ember.beforeObserver ->
-    current = @get("selected")
-    Ember.set(current, "selected", false) if current
-  , "selected"
-
-  selectionChanged: (->
-    current = @get("selected")
-    Ember.set(current, "selected", true) if current
-  ).observes("selected")
-
-window.Application = Ember.Application.create()
+  itemViewClass: Application.NavigationItem
 
 Application.navigation = Ember.ArrayProxy.create
   content: [
