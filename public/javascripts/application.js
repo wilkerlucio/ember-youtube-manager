@@ -15,30 +15,6 @@
     itemViewClass: Application.NavigationItem
   });
 
-  Application.navigation = Ember.ArrayProxy.create({
-    content: [
-      {
-        link: "uploads",
-        label: "Uploads"
-      }, {
-        link: "playlists",
-        label: "Playlists"
-      }, {
-        link: "history",
-        label: "History"
-      }, {
-        link: "watch-later",
-        label: "Watch Later"
-      }, {
-        link: "favorites",
-        label: "Favorites"
-      }, {
-        link: "likes",
-        label: "Likes"
-      }
-    ]
-  });
-
   Application.router = YoutubeManager.Router.create({
     notFoundView: function() {
       return Ember.View.create({
@@ -62,13 +38,15 @@
     }
   });
 
-  Ember.Binding.transform({
-    to: function(value, nav) {
-      return nav.find(function(o) {
-        return o.link === value;
-      });
-    },
-    from: function(value) {
-      if (value) return Ember.get(value, "link");
-    }
-  }).from("Application.router.current").to("selected").connect(Application.navigation);
+  Ember.addObserver(Application, "navigation", function() {
+    return Ember.Binding.transform({
+      to: function(value, nav) {
+        return nav.find(function(o) {
+          return o.link === value;
+        });
+      },
+      from: function(value) {
+        if (value) return Ember.get(value, "link");
+      }
+    }).from("Application.router.current").to("selected").connect(Application.navigation);
+  });
