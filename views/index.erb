@@ -3,7 +3,11 @@
   <head>
     <title>Youtube Video Manager</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/video-manager.css" />
+    <script type="text/javascript">
+      PageData = {current: "<%= @page %>"}
+    </script>
     <script type="text/javascript" src="/vendor/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery.history.js"></script>
     <script type="text/javascript" src="/vendor/ember-0.9.2.js"></script>
     <script type="text/javascript" src="/javascripts/youtube_manager.js"></script>
     <script type="text/javascript" src="/javascripts/router.js"></script>
@@ -11,6 +15,7 @@
     <script type="text/javascript" src="/javascripts/views/selectable_view.js"></script>
     <script type="text/javascript" src="/javascripts/mixins/selectable_collection_view.js"></script>
     <script type="text/javascript" src="/javascripts/handlebars/nav.js"></script>
+    <script type="text/javascript" src="/javascripts/helpers/history.js"></script>
     <script type="text/javascript" src="/javascripts/application.js"></script>
 
     <script type="text/x-handlebars" data-template-name="uploads">

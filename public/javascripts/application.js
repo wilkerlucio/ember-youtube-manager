@@ -23,7 +23,7 @@
         }
       });
     },
-    current: "uploads",
+    current: PageData.current,
     routes: {
       "uploads": function() {
         return Ember.View.create({
@@ -37,6 +37,8 @@
       }
     }
   });
+
+  Ember.Binding.from("Application.router.current").to("state").connect(YoutubeManager.History);
 
   Ember.addObserver(Application, "navigation", function() {
     return Ember.Binding.transform({

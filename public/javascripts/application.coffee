@@ -11,13 +11,14 @@ Application.NavigationView = Ember.CollectionView.extend YoutubeManager.Selectab
 Application.router = YoutubeManager.Router.create
   notFoundView: -> Ember.View.create template: -> "Hey, there is no such view!"
 
-  current: "uploads"
+  current: PageData.current
 
   routes:
     "uploads": -> Ember.View.create(templateName: "uploads")
     "playlists": -> Ember.View.create(templateName: "playlists")
 
 # connecting separated components
+Ember.Binding.from("Application.router.current").to("state").connect(YoutubeManager.History)
 Ember.addObserver Application, "navigation", ->
   Ember.Binding.transform(
     to: (value, nav) -> nav.find (o) -> o.link == value
