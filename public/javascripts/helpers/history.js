@@ -14,7 +14,7 @@
     stateChanged: function() {
       var state;
       state = History.getState();
-      return this.set("state", state.data.name);
+      if (state.data.name) return this.set("state", state.data.name);
     },
     updateState: (function() {
       var state;
