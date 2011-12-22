@@ -14,15 +14,15 @@
     stateChanged: function() {
       var state;
       state = History.getState();
-      if (state.data.name) return this.set("state", state.data.name);
+      if (state.data.link) return this.set("state", state.data.link);
     },
     updateState: (function() {
       var state;
       state = this.get("state");
       if (History.enabled) {
         return History.pushState({
-          name: state
-        }, state, state);
+          link: state
+        }, null, state);
       }
     }).observes("state")
   });

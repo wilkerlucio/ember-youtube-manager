@@ -9,9 +9,9 @@ YoutubeManager.History = Ember.Object.create
 
   stateChanged: ->
     state = History.getState()
-    @set("state", state.data.name) if state.data.name
+    @set("state", state.data.link) if state.data.link
 
   updateState: (->
     state = @get("state")
-    History.pushState({name: state}, state, state) if History.enabled
+    History.pushState({link: state}, null, state) if History.enabled
   ).observes("state")
