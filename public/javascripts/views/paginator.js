@@ -17,8 +17,11 @@
           cur = self.getPath("content.page");
           n = cur + n;
         }
-        return self.setPath("content.page", n);
+        return self.setPath("content.page", n, true);
       });
+    },
+    willDestroyElement: function() {
+      return $("button:not(.toggled)").die("click");
     },
     totalPages: (function() {
       return Math.ceil(this.getPath("content.total") / this.getPath("content.per_page")) || 0;
