@@ -53,9 +53,8 @@
 
       {{#if content.loading}}
         <div class="loading"><img src="/images/ajax-loader.gif"></div>
-      {{else}}
-        {{collection YoutubeManager.VideoListView contentBinding="content"}}
       {{/if}}
+      {{collection YoutubeManager.VideoListView contentBinding="content"}}
 
       {{view YoutubeManager.Paginator contentBinding="content"}}
     </script>
