@@ -624,3 +624,8 @@ ul.video-list li.selected {
 .pagination button.action {
   letter-spacing: normal;
 }
+
+.loading img {
+  display: block;
+  margin: 50px auto;
+}

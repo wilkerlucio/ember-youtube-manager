@@ -4,7 +4,7 @@
     <title>Youtube Video Manager</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/video-manager.css" />
     <script type="text/javascript">
-      PageData = {current: "<%= @page %>"}
+      PageData = { current: "<%= @page %>" };
     </script>
     <script type="text/javascript" src="/vendor/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="/vendor/jquery.history.js"></script>
@@ -19,12 +19,13 @@
     <script type="text/javascript" src="/javascripts/mixins/selectable_collection_view.js"></script>
     <script type="text/javascript" src="/javascripts/handlebars/nav.js"></script>
     <script type="text/javascript" src="/javascripts/helpers/history.js"></script>
+    <script type="text/javascript" src="/javascripts/server_data.js"></script>
     <script type="text/javascript" src="/javascripts/application.js"></script>
 
     <script type="text/x-handlebars" data-template-name="uploads">
       <div class="header-wrapper">
         <h2>Uploads</h2>
-        <span class="badge">34</span>
+        <span class="badge">{{content.length}}</span>
       </div>
 
       <div class="actions-bar">
@@ -32,6 +33,7 @@
         <input type="text" class="search" placeholder="Search uploads">
 
         {{view YoutubeManager.Checkbox valueBinding="allSelected"}}
+
         <button type="button" class="action addto">
           <img class="icon add" src="/images/pixel.gif" alt="" />
           <span>Add to</span>
@@ -48,7 +50,11 @@
         </button>
       </div>
 
-      {{collection YoutubeManager.VideoListView contentBinding="content"}}
+      {{#if content.isLoaded}}
+        {{collection YoutubeManager.VideoListView contentBinding="content"}}
+      {{else}}
+        <div class="loading"><img src="/images/ajax-loader.gif"></div>
+      {{/if}}
 
       <div class="pagination">
         <div class="wrapper">
@@ -126,7 +132,6 @@
             {{navItem link="uploads"     label="Uploads"}}
             {{navItem link="playlists"   label="Playlists"}}
             {{navItem link="history"     label="History"}}
-            {{navItem link="watch-later" label="Watch Later"}}
             {{navItem link="favorites"   label="Favorites"}}
             {{navItem link="likes"       label="Likes"}}
           {{/nav}}

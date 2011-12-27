@@ -12,4 +12,4 @@ YoutubeManager.Checkbox = Ember.View.extend
 
   _updateElementValue: ->
     input = this.$('input:checkbox')
-    @set('value', input.prop('checked'))
+    @set('value', !!input.prop('checked'))

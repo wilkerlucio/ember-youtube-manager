@@ -11,6 +11,6 @@
     _updateElementValue: function() {
       var input;
       input = this.$('input:checkbox');
-      return this.set('value', input.prop('checked'));
+      return this.set('value', !!input.prop('checked'));
     }
   });
