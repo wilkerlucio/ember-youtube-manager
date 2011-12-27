@@ -16,16 +16,19 @@ Application.router = YoutubeManager.Router.create
   current: PageData.current
 
   routes:
-    "uploads": -> Ember.View.create
-      templateName: "uploads"
-      content: Application.historyData
-      allSelected: ((key, value) ->
-        if value != undefined
-          @get("content").setEach("selected", value)
-          value
-        else
-          @get("content").everyProperty("selected", true)
-      ).property("content.@each.selected")
+    "uploads": ->
+      Application.historyData.fetchAll()
+
+      Ember.View.create
+        templateName: "uploads"
+        content: Application.historyData
+        allSelected: ((key, value) ->
+          if value != undefined
+            @get("content").setEach("selected", value)
+            value
+          else
+            @get("content").everyProperty("selected", true)
+        ).property("content.@each.selected")
 
     "playlists": -> Ember.View.create(templateName: "playlists")
 

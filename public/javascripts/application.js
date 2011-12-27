@@ -30,6 +30,7 @@
     current: PageData.current,
     routes: {
       "uploads": function() {
+        Application.historyData.fetchAll();
         return Ember.View.create({
           templateName: "uploads",
           content: Application.historyData,

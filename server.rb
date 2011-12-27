@@ -19,9 +19,9 @@ dataProxies = {
       proxy = dataProxies[page]
 
       if proxy
-        proxy.all.to_json
+        {"per_page" => proxy.per_page, "total" => proxy.total, "content" => proxy.all(params)}.to_json
       else
-        "[]"
+        {"per_page" => 0, "total" => 0, "content" => []}.to_json
       end
     else
       @page = page.length > 0 ? page : "uploads"

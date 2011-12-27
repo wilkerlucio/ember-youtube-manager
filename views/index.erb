@@ -16,6 +16,7 @@
     <script type="text/javascript" src="/javascripts/views/video_view.js"></script>
     <script type="text/javascript" src="/javascripts/views/video_list_view.js"></script>
     <script type="text/javascript" src="/javascripts/views/simple_checkbox.js"></script>
+    <script type="text/javascript" src="/javascripts/views/paginator.js"></script>
     <script type="text/javascript" src="/javascripts/mixins/selectable_collection_view.js"></script>
     <script type="text/javascript" src="/javascripts/handlebars/nav.js"></script>
     <script type="text/javascript" src="/javascripts/helpers/history.js"></script>
@@ -25,7 +26,7 @@
     <script type="text/x-handlebars" data-template-name="uploads">
       <div class="header-wrapper">
         <h2>Uploads</h2>
-        <span class="badge">{{content.length}}</span>
+        <span class="badge">{{content.total}}</span>
       </div>
 
       <div class="actions-bar">
@@ -50,24 +51,31 @@
         </button>
       </div>
 
-      {{#if content.isLoaded}}
-        {{collection YoutubeManager.VideoListView contentBinding="content"}}
-      {{else}}
+      {{#if content.loading}}
         <div class="loading"><img src="/images/ajax-loader.gif"></div>
+      {{else}}
+        {{collection YoutubeManager.VideoListView contentBinding="content"}}
       {{/if}}
 
-      <div class="pagination">
-        <div class="wrapper">
-          <button type="button" class="action toggled">
-            <span>1</span>
-          </button>
-          <button type="button" class="action">
-            <span>2</span>
-          </button>
-          <button type="button" class="action">
-            <span>Next &raquo;</span>
-          </button>
-        </div>
+      {{view YoutubeManager.Paginator contentBinding="content"}}
+    </script>
+    <script type="text/x-handlebars" data-template-name="paginator">
+      <div class="wrapper">
+        {{#unless isFirstPage}}
+        <button type="button" class="action" data-page="-1">
+          <span>&laquo; Previous</span>
+        </button>
+        {{/unless}}
+        {{#each pages}}
+        <button type="button" {{bindAttr class="toggled action" data-page="realNumber"}}>
+          <span>{{number}}</span>
+        </button>
+        {{/each}}
+        {{#unless isLastPage}}
+        <button type="button" class="action" data-page="+1">
+          <span>Next &raquo;</span>
+        </button>
+        {{/unless}}
       </div>
     </script>
     <script type="text/x-handlebars" data-template-name="playlists">
@@ -138,6 +146,19 @@
         </nav>
         {{view YoutubeManager.CardView tagName="section" currentViewBinding="Application.router.currentView"}}
       </div>
+    </script>
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4ef97bcb613f5d2a39000001');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
     </script>
     <noscript>
       You need javascript enabled to see this page.
