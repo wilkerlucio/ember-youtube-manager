@@ -3,7 +3,7 @@ class VideoData
 
   def initialize(json)
     @data = JSON.parse(json)
-    @per_page = 100
+    @per_page = 5
   end
 
   def all(query)
