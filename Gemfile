@@ -6,5 +6,7 @@ gem "guard-process"
 gem "json"
 
 # optional for mac os
-gem "rb-fsevent"
-gem "growl_notify"
+group :development do
+  gem "rb-fsevent"
+  gem "growl_notify"
+end
