@@ -1,2 +1,2 @@
 #! /bin/bash
-phd $0 ember-youtube-settings ember-youtube-settings
+phd $0 ember-youtube-settings ember-youtube.wilker-dev.com
