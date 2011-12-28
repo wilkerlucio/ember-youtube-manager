@@ -645,3 +645,15 @@ ul.video-list li.selected {
   margin-left: -83px;
   margin-top: -11px;
 }
+
+footer {
+  clear: both;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 11px;
+}
+
+footer a {
+  color: #485c78;
+  text-decoration: none;
+}
