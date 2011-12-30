@@ -45,10 +45,14 @@
           <img class="arrow" src="/images/pixel.gif" alt="" />
         </button>
         <span class="view-label">View:</span>
-        <button type="button" class="action text">
-          <span>Newest</span>
-          <img class="arrow" src="/images/pixel.gif" alt="" />
-        </button>
+        {{#ymButtonDropdown class="text" valueBinding="Application.uploadData.filterString"}}
+          {{ymOption title="Newest" value="sort:date"}}
+          {{ymOption title="Oldest" value="sort:date:desc"}}
+          {{ymOption title="Most viewed" value="sort:viewCount:desc"}}
+          {{ymOption title="Public" value="filter:privacy:public"}}
+          {{ymOption title="Unlisted" value="filter:privacy:unlisted"}}
+          {{ymOption title="Private" value="filter:privacy:private"}}
+        {{/ymButtonDropdown}}
       </div>
 
       <div {{bindAttr class="Ember.TRUE:loading content.loading:show"}}><img src="/images/ajax-loader.gif"></div>
