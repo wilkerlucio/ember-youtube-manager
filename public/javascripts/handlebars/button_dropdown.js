@@ -1,7 +1,7 @@
 
   Handlebars.registerHelper("ymButtonDropdown", function(block) {
     var button, content;
-    button = YoutubeManager.ButtonDropdown.create(block.hash);
+    button = Ember.Handlebars.ViewHelper.viewClassFromHTMLOptions(YoutubeManager.ButtonDropdown, block.hash, this).create();
     content = [];
     block(content);
     button.set("content", content);
