@@ -627,6 +627,10 @@ ul.video-list li.selected {
 }
 
 .loading {
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  display: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -636,6 +640,17 @@ ul.video-list li.selected {
   vertical-align: middle;
   z-index: 10;
   background: rgba(0, 0, 0, 0.6);
+
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}
+
+.loading.show {
+  display: block;
+  opacity: 1;
 }
 
 .loading img {

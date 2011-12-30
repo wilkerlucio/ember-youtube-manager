@@ -1,6 +1,8 @@
 
   window.Application = Ember.Application.create();
 
+  Ember.TRUE = true;
+
   Application.historyData = YoutubeManager.ServerData.create({
     path: "/uploads"
   });
