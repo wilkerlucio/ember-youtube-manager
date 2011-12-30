@@ -3,7 +3,7 @@
 
   Ember.TRUE = true;
 
-  Application.historyData = YoutubeManager.ServerData.create({
+  Application.uploadData = YoutubeManager.ServerData.create({
     path: "/uploads"
   });
 
@@ -32,10 +32,10 @@
     current: PageData.current,
     routes: {
       "uploads": function() {
-        Application.historyData.fetchAll();
+        Application.uploadData.fetchAll();
         return Ember.View.create({
           templateName: "uploads",
-          content: Application.historyData,
+          content: Application.uploadData,
           allSelected: (function(key, value) {
             if (value !== void 0) {
               this.get("content").setEach("selected", value);

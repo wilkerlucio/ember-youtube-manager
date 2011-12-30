@@ -1,7 +1,7 @@
 window.Application = Ember.Application.create()
 
 Ember.TRUE = true
-Application.historyData = YoutubeManager.ServerData.create(path: "/uploads")
+Application.uploadData = YoutubeManager.ServerData.create(path: "/uploads")
 
 Application.NavigationItem = YoutubeManager.SelectableView.extend
   template: Ember.Handlebars.compile('<a {{bindAttr href="content.link"}}>{{content.label}}</a>')
@@ -18,11 +18,11 @@ Application.router = YoutubeManager.Router.create
 
   routes:
     "uploads": ->
-      Application.historyData.fetchAll()
+      Application.uploadData.fetchAll()
 
       Ember.View.create
         templateName: "uploads"
-        content: Application.historyData
+        content: Application.uploadData
         allSelected: ((key, value) ->
           if value != undefined
             @get("content").setEach("selected", value)
