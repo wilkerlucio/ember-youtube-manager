@@ -10,7 +10,7 @@ YoutubeManager.Paginator = Ember.View.extend
   didInsertElement: ->
     self = this
 
-    $("button:not(.toggled)").live "click", (e) ->
+    @$("button:not(.toggled)").live "click", (e) ->
       page = $(this).attr("data-page")
       n = parseInt(page)
 
@@ -19,9 +19,6 @@ YoutubeManager.Paginator = Ember.View.extend
         n = cur + n
 
       self.setPath("content.page", n, true)
-
-  willDestroyElement: ->
-    $("button:not(.toggled)").die "click"
 
   totalPages: (->
     Math.ceil(@getPath("content.total") / @getPath("content.per_page")) || 0

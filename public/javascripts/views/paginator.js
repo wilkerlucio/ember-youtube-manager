@@ -9,7 +9,7 @@
     didInsertElement: function() {
       var self;
       self = this;
-      return $("button:not(.toggled)").live("click", function(e) {
+      return this.$("button:not(.toggled)").live("click", function(e) {
         var cur, n, page;
         page = $(this).attr("data-page");
         n = parseInt(page);
@@ -19,9 +19,6 @@
         }
         return self.setPath("content.page", n, true);
       });
-    },
-    willDestroyElement: function() {
-      return $("button:not(.toggled)").die("click");
     },
     totalPages: (function() {
       return Math.ceil(this.getPath("content.total") / this.getPath("content.per_page")) || 0;
