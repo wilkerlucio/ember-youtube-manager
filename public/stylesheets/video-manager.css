@@ -376,7 +376,8 @@ button.action span {
 }
 
 button img.arrow {
-  margin-top: -6px;
+  margin-top: -4px;
+  margin-left: 1px;
 }
 
 ul.video-list {
